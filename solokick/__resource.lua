@@ -1,7 +1,3 @@
-client_scripts{
-	"client",
-}
+client_script "client.lua"
 
-server_scripts{
-	"server",
-}
+server_script "server.lua"

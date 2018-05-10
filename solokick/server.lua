@@ -16,3 +16,21 @@ function countPlayer() -- count all players
 	end
 	return counter
 end
+
+-- Version Checking down here, better don't touch this
+local CurrentVersion = '2.0'
+PerformHttpRequest('https://raw.githubusercontent.com/chaixshot/fivem/master/solokick/version', function(Error, NewestVersion, Header)
+	if CurrentVersion ~= NewestVersion then
+		print('\n')
+		print('##')
+		print('## Solo Kick')
+		print('##')
+		print('## Current Version: ' .. CurrentVersion)
+		print('## Newest Version: ' .. NewestVersion)
+		print('##')
+		print('## Download')
+		print('## https://github.com/chaixshot/fivem/tree/master/solokick')
+		print('##')
+		print('\n')
+	end
+end)
