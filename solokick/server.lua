@@ -1,5 +1,5 @@
-RegisterServerEvent('sendSessionPlayerNumber')
-AddEventHandler('sendSessionPlayerNumber', function(clientPlayerNumber)
+RegisterServerEvent('sendSession:PlayerNumber')
+AddEventHandler('sendSession:PlayerNumber', function(clientPlayerNumber)
 	if source ~= nil then
 		serverPlayerNumber = countPlayer()
 		if (clientPlayerNumber ~= serverPlayerNumber) and (clientPlayerNumber == 1) then -- For first spawn solo
@@ -19,3 +19,7 @@ function countPlayer() -- count all players
 	end
 	return counter
 end
+
+AddEventHandler("playerConnecting",function(name,setMessage) -- Fix player connecting
+	TriggerClientEvent('sendSession:PlayerConnecting', -1)
+end)
