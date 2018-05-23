@@ -23,4 +23,21 @@ end)
 
 AddEventHandler("playerDropped",function(reason)
 	TriggerClientEvent('sendSession:DelayCheck', -1, 60000)
-end
+end)
+
+local CurrentVersion = '2.4'
+PerformHttpRequest('https://raw.githubusercontent.com/chaixshot/fivem/master/solokick/version', function(Error, NewestVersion, Header)
+	if CurrentVersion ~= NewestVersion then
+		print('\n')
+		print('##')
+		print('## Solo Kick')
+		print('##')
+		print('## Current Version: ' .. CurrentVersion)
+		print('## Newest Version: ' .. NewestVersion)
+		print('##')
+		print('## Download')
+		print('## https://github.com/chaixshot/fivem/tree/master/solokick')
+		print('##')
+		print('\n')
+	end
+end)
