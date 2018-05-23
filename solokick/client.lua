@@ -7,10 +7,10 @@ AddEventHandler("playerSpawned",function() -- delay state recording
 	end)
 end)
 
-RegisterNetEvent("sendSession:PlayerConnecting")
-AddEventHandler("sendSession:PlayerConnecting", function()
+RegisterNetEvent("sendSession:DelayCheck")
+AddEventHandler("sendSession:DelayCheck", function(timer)
 	playerconnecting = true
-	SetTimeout(120000,function() -- Delay player connect 2 minute.
+	SetTimeout(timer ,function() -- Delay Checking
 		playerconnecting= false
 	end)
 end)
