@@ -24,7 +24,7 @@ function countPlayer() -- Count all server players
 end
 
 -- Check for update
-local CurrentVersion = [[2.4
+local CurrentVersion = [[3.0
 ]]
 PerformHttpRequest('https://raw.githubusercontent.com/chaixshot/fivem/master/solokick/version', function(Error, NewestVersion, Header)
 	if CurrentVersion ~= NewestVersion then
