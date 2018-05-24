@@ -22,17 +22,22 @@ AddEventHandler('sendSession:PlayerNumber', function(clientPlayerNumber)
 end)
 
 AddEventHandler("playerConnecting",function(name,setMessage) -- Fix player connecting
-	TriggerClientEvent('sendSession:PlayerConnecting', -1, source)
-	PlayerConnecting[source]=source
+	if PlayerConnecting[source] == nil then
+		TriggerClientEvent('sendSession:PlayerConnecting', -1, source)
+		PlayerConnecting[source]=source
+	end
 end)
 
 RegisterServerEvent('sendSession:PlayerSpawned') -- Fix player connecting
 AddEventHandler('sendSession:PlayerSpawned', function()
-	TriggerClientEvent('sendSession:PlayerSpawned', -1, source)
-	PlayerConnecting[source]=nil
+	if PlayerConnecting[source] ~= nil then
+		TriggerClientEvent('sendSession:PlayerSpawned', -1, source)
+		PlayerConnecting[source]=nil
+	end
 end)
 
-AddEventHandler("playerDropped",function() -- Fix player connecting
+AddEventHandler("playerDropped",function(reason) -- Fix player connecting
+	local source = source
 	if PlayerConnecting[source] ~= nil then
 		TriggerClientEvent('sendSession:PlayerSpawned', -1, source)
 		PlayerConnecting[source]=nil
