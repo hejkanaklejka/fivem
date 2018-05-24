@@ -30,7 +30,7 @@ Citizen.CreateThread(function() -- Check solo session every 1 minute
 		if state_ready and playerconnecting == 0 then
 			TriggerServerEvent('sendSession:PlayerNumber', GetNumberOfPlayers())
 			print("sendSession:PlayerNumber") -- Debug
-			Wait(30000)
+			Wait(60000)
 		end
 		Wait(0)
 	end
