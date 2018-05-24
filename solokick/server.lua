@@ -10,10 +10,7 @@ RegisterServerEvent('sendSession:PlayerNumber')
 AddEventHandler('sendSession:PlayerNumber', function(clientPlayerNumber)
 	if source ~= nil then
 		serverPlayerNumber = countPlayer()
-		if (clientPlayerNumber ~= serverPlayerNumber) and (clientPlayerNumber == 1) then -- For first spawn solo
-			DropPlayer(source, '[Kick] Solo session.') -- kick player
-			print("sendSession:PlayerNumber clientPlayerNumber-"..clientPlayerNumber.." serverPlayerNumber-"..serverPlayerNumber) -- debug
-		elseif (serverPlayerNumber-5 >= 1) and (clientPlayerNumber < serverPlayerNumber-5) then -- For long play solo
+		if clientPlayerNumber ~= serverPlayerNumber then -- For first spawn solo
 			DropPlayer(source, '[Kick] Solo session.') -- kick player
 			print("sendSession:PlayerNumber clientPlayerNumber-"..clientPlayerNumber.." serverPlayerNumber-"..serverPlayerNumber) -- debug
 		end
