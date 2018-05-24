@@ -9,16 +9,18 @@ end)
 
 RegisterNetEvent("sendSession:PlayerConnecting") -- Call when other player connecting
 AddEventHandler("sendSession:PlayerConnecting", function(PlayerId)
-	playerconnecting = playerconnecting+1
-	PlayerConnectingId[PlayerId]=PlayerId
-	print("sendSession:playerconnecting: "..playerconnecting)
+	if PlayerConnectingId[PlayerId] == nil then
+		playerconnecting = playerconnecting+1
+		PlayerConnectingId[PlayerId] = PlayerId
+		print("sendSession:playerconnecting: "..playerconnecting)
+	end
 end)
 
 RegisterNetEvent("sendSession:PlayerSpawned") -- Call when other player connected
 AddEventHandler("sendSession:PlayerSpawned", function()
 	if PlayerConnectingId[PlayerId] ~= nil then
 		playerconnecting = playerconnecting-1
-		PlayerConnectingId[PlayerId]=nil
+		PlayerConnectingId[PlayerId] = nil
 		print("sendSession:playerconnecting: "..playerconnecting)
 	end
 end)
