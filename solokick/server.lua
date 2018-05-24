@@ -1,4 +1,3 @@
-local PlayerConnecting = {}
 local function countPlayer() -- count all players
 	local counter = 0
 	for _ in pairs(GetPlayers()) do
@@ -22,26 +21,17 @@ AddEventHandler('sendSession:PlayerNumber', function(clientPlayerNumber)
 end)
 
 AddEventHandler("playerConnecting",function(name,setMessage) -- Fix player connecting
-	if PlayerConnecting[source] == nil then
-		TriggerClientEvent('sendSession:PlayerConnecting', -1, source)
-		PlayerConnecting[source]=source
-	end
+	TriggerClientEvent('sendSession:PlayerConnecting', -1, source)
 end)
 
 RegisterServerEvent('sendSession:PlayerSpawned') -- Fix player connecting
 AddEventHandler('sendSession:PlayerSpawned', function()
-	if PlayerConnecting[source] ~= nil then
-		TriggerClientEvent('sendSession:PlayerSpawned', -1, source)
-		PlayerConnecting[source]=nil
-	end
+	TriggerClientEvent('sendSession:PlayerSpawned', -1, source)
 end)
 
 AddEventHandler("playerDropped",function(reason) -- Fix player connecting
 	local source = source
-	if PlayerConnecting[source] ~= nil then
-		TriggerClientEvent('sendSession:PlayerSpawned', -1, source)
-		PlayerConnecting[source]=nil
-	end
+	TriggerClientEvent('sendSession:PlayerSpawned', -1, source)
 end)
 
 
