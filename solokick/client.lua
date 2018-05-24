@@ -11,13 +11,13 @@ RegisterNetEvent("sendSession:PlayerConnecting") -- Call when other player conne
 AddEventHandler("sendSession:PlayerConnecting", function(PlayerId)
 	if PlayerConnectingId[PlayerId] == nil then
 		playerconnecting = playerconnecting+1
-		PlayerConnectingId[PlayerId] = PlayerId
+		PlayerConnectingId[PlayerId] = 1
 		print("sendSession:playerconnecting: "..playerconnecting)
 	end
 end)
 
 RegisterNetEvent("sendSession:PlayerSpawned") -- Call when other player connected
-AddEventHandler("sendSession:PlayerSpawned", function()
+AddEventHandler("sendSession:PlayerSpawned", function(PlayerId)
 	if PlayerConnectingId[PlayerId] ~= nil then
 		playerconnecting = playerconnecting-1
 		PlayerConnectingId[PlayerId] = nil
@@ -36,6 +36,6 @@ Citizen.CreateThread(function() -- Check solo session every 1 minute
 	end
 end)
 
-AddEventHandler("playerSpawned",function()
+AddEventHandler("playerSpawned",function() -- delay state recording
 	TriggerServerEvent("sendSession:PlayerSpawned")
 end)
