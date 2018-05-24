@@ -24,6 +24,11 @@ AddEventHandler("playerConnecting",function(name,setMessage) -- Fix player conne
 	TriggerClientEvent('sendSession:PlayerConnecting', -1)
 end)
 
+RegisterServerEvent('sendSession:PlayerSpawned') -- Fix player connecting
+AddEventHandler('sendSession:PlayerSpawned', function()
+	TriggerClientEvent('sendSession:PlayerSpawned', -1)
+end)
+
 
 -- Check for update
 local CurrentVersion = [[3.0
