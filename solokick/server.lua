@@ -20,18 +20,20 @@ AddEventHandler('sendSession:PlayerNumber', function(clientPlayerNumber)
 	end
 end)
 
-AddEventHandler("playerConnecting",function(name,setMessage) -- Fix player connecting
-	TriggerClientEvent('sendSession:PlayerConnecting', -1, source)
+AddEventHandler( 'playerConnecting', function( name, setReason )  -- Fix player connecting
+	TriggerClientEvent('sendSession:PlayerConnecting', -1, name)
+	print("----------------sendSession:PlayerConnecting "..name)
 end)
 
 RegisterServerEvent('sendSession:PlayerSpawned') -- Fix player connecting
 AddEventHandler('sendSession:PlayerSpawned', function()
-	TriggerClientEvent('sendSession:PlayerSpawned', -1, source)
+	TriggerClientEvent('sendSession:PlayerSpawned', -1, GetPlayerName(source))
+	print("----------------sendSession:PlayerSpawned "..GetPlayerName(source))
 end)
 
 AddEventHandler("playerDropped",function(reason) -- Fix player connecting
-	local source = source
-	TriggerClientEvent('sendSession:PlayerSpawned', -1, source)
+	TriggerClientEvent('sendSession:PlayerSpawned', -1, GetPlayerName(source))
+	print("----------------playerDropped:sendSession:PlayerDroped "..GetPlayerName(source))
 end)
 
 
