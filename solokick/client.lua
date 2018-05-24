@@ -1,5 +1,6 @@
 local state_ready = false
-local playerconnecting = false
+local playerconnecting = 0
+local PlayerConnectingId = {}
 
 AddEventHandler("playerSpawned",function() -- Delay client state
 	Citizen.Wait(30000)
@@ -7,32 +8,32 @@ AddEventHandler("playerSpawned",function() -- Delay client state
 end)
 
 RegisterNetEvent("sendSession:PlayerConnecting") -- Call when other player connecting
-AddEventHandler("sendSession:PlayerConnecting", function()
-	playerconnecting = true
+AddEventHandler("sendSession:PlayerConnecting", function(PlayerId)
+	playerconnecting = playerconnecting+1
+	PlayerConnectingId[PlayerId]=PlayerId
+	print("sendSession:playerconnecting: "..playerconnecting)
 end)
 
 RegisterNetEvent("sendSession:PlayerSpawned") -- Call when other player connected
 AddEventHandler("sendSession:PlayerSpawned", function()
-	playerconnecting= false
+	if PlayerConnectingId[PlayerId] ~= nil then
+		playerconnecting = playerconnecting-1
+		PlayerConnectingId[PlayerId]=nil
+		print("sendSession:playerconnecting: "..playerconnecting)
+	end
 end)
 
 Citizen.CreateThread(function() -- Check solo session every 1 minute
 	while true do
-		if state_ready and not playerconnecting then
+		if state_ready and playerconnecting == 0 then
 			TriggerServerEvent('sendSession:PlayerNumber', GetNumberOfPlayers())
 			print("sendSession:PlayerNumber") -- Debug
-			Wait(60000)
+			Wait(30000)
 		end
 		Wait(0)
 	end
 end)
 
-Citizen.CreateThread(function() -- Call when other player connected
- 	while true do
-		Citizen.Wait(0)
-		if NetworkIsSessionStarted() then
-			TriggerServerEvent("sendSession:PlayerSpawned")
-			return
-		end
- 	end
- end)
+AddEventHandler("playerSpawned",function()
+	TriggerServerEvent("sendSession:PlayerSpawned")
+end)
