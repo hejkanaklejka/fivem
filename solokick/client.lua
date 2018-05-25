@@ -20,7 +20,7 @@ AddEventHandler("sendSession:PlayerSpawned", function(PlayerName)
 end)
 
 Citizen.CreateThread(function() -- Check solo session every 30 sec
-	Wait(30000) -- Delay first spawn.
+	Wait(180000) -- Delay first spawn.
 	while true do
 		if playerconnecting == 0 then
 			TriggerServerEvent('sendSession:PlayerNumber', GetNumberOfPlayers())
