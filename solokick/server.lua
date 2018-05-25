@@ -38,7 +38,7 @@ end)
 
 
 -- Check for update
-local CurrentVersion = [[3.2
+local CurrentVersion = [[3.3
 ]]
 PerformHttpRequest('https://raw.githubusercontent.com/chaixshot/fivem/master/solokick/version', function(Error, NewestVersion, Header)
 	if CurrentVersion ~= NewestVersion then
