@@ -23,9 +23,9 @@ Citizen.CreateThread(function() -- Check solo session every 30 sec
 	Wait(180000) -- Delay first spawn.
 	while true do
 		if playerconnecting == 0 then
-			Wait(30000)
 			TriggerServerEvent('sendSession:PlayerNumber', GetNumberOfPlayers())
 			print("Solo Checking") -- Debug
+			Wait(60000)
 		end
 		Wait(0)
 	end
